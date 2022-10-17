@@ -30,32 +30,26 @@
 
         $sql = "SELECT * FROM books";
         $result = $conn->query($sql);
-        ?>
 
-        <section class="book-grid">
-            <?php
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
 
-                    echo  ' <div class="book">
-                                <img src="images/Book.png" alt="A vector drawing of a book" title="'. $row["book_description"] . '">
-                                <h3>' . $row["book_name"] . '</h3>
-                                <h4>' . $row["book_author"] . '</h4>
+        if ($result->num_rows > 0) {
+            echo  '<section class="book-grid">';
+
+            while ($row = $result->fetch_assoc()) {
+                echo  ' <div class="book">
+                            <img src="images/Book.png" alt="A vector drawing of a book" title="' . $row["book_description"] . '">
+                            <h3>' . $row["book_name"] . '</h3>
+                            <h4>' . $row["book_author"] . '</h4>
                             </div>';
-                }
-            } else {
-                echo ' 0 results';
             }
+            echo  '</section>';
+        } else {
+            echo 'There are no books in the database';
+        }
 
-            $conn->close();
-            ?>
-
-        </section>
-
-        <?php
-
-
+        $conn->close();
         ?>
+
     </main>
     <footer>
 
