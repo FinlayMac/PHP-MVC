@@ -6,13 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Shop</title>
+    <link rel="stylesheet" href="css/bookshop.css">
 </head>
 
 <body>
 
     <header>
-        <nav></nav>
+        <nav>
+            <ul>
+                <li>Home</li>
+                <li>About Us</li>
+                <li>Contact Us</li>
+            </ul>
+        </nav>
     </header>
+    <div class="spacer"></div>
     <main>
 
         <h1>Check out all our books:</h1>
@@ -23,32 +31,31 @@
         $sql = "SELECT * FROM books";
         $result = $conn->query($sql);
         ?>
-        <table>
-            <tr>
-                <th>Book Name:</th>
-                <th>Book Author:</th>
-                <th>Book Description:</th>
-            </tr>
 
+        <section class="book-grid">
             <?php
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
 
-                 echo  '<tr>
-                            <td>' . $row["book_name"] . '</td>
-                            <td>' . $row["book_author"] . '</td>
-                            <td>' . $row["book_description"] . '</td>
-                        </tr>';
+                    echo  ' <div class="book">
+                                <img src="images/Book.png" alt="A vector drawing of a book" title="'. $row["book_description"] . '">
+                                <h3>' . $row["book_name"] . '</h3>
+                                <h4>' . $row["book_author"] . '</h4>
+                            </div>';
                 }
-           
             } else {
                 echo ' 0 results';
             }
 
             $conn->close();
             ?>
-            
-        </table>
+
+        </section>
+
+        <?php
+
+
+        ?>
     </main>
     <footer>
 
