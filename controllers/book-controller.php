@@ -1,6 +1,7 @@
 <?php
 include_once("models/book-model.php");
 include_once('models/book.php');
+include_once('views/card-view.php');
 
 class BookController
 {
@@ -22,12 +23,11 @@ class BookController
             echo  '<section class="book-grid">';
 
             foreach ($result as $singleBook) {
-                echo  ' <div class="book">
-                            <img src="images/Book.png" alt="A vector drawing of a book" title="' . $singleBook->description . '">
-                            <h3>' . $singleBook->name  . '</h3>
-                            <h4>' . $singleBook->author  . '</h4>
-                        </div>';
+                $newCard = new CardView($singleBook->name, $singleBook->author, $singleBook->description);
             }
+
+            $myBook = new CardView("Dune", "Frank Herbert", "");
+
             echo  '</section>';
         } else {
             echo 'There are no books in the database';
