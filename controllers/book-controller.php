@@ -1,5 +1,6 @@
 <?php
 include_once("models/book-model.php");
+include_once('models/book.php');
 
 class BookController
 {
@@ -16,15 +17,16 @@ class BookController
 
         $result = $this->bookModel->getAllBooks();
 
-        if ($result->num_rows > 0) {
+        if (count($result) > 0) {
+
             echo  '<section class="book-grid">';
 
-            while ($row = $result->fetch_assoc()) {
+            foreach ($result as $singleBook) {
                 echo  ' <div class="book">
-                            <img src="images/Book.png" alt="A vector drawing of a book" title="' . $row["book_description"] . '">
-                            <h3>' . $row["book_name"] . '</h3>
-                            <h4>' . $row["book_author"] . '</h4>
-                            </div>';
+                            <img src="images/Book.png" alt="A vector drawing of a book" title="' . $singleBook->description . '">
+                            <h3>' . $singleBook->name  . '</h3>
+                            <h4>' . $singleBook->author  . '</h4>
+                        </div>';
             }
             echo  '</section>';
         } else {
