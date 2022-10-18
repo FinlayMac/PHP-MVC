@@ -1,14 +1,20 @@
 <?php
+include_once("models/book-model.php");
+
 class BookController
 {
 
+    public $bookModel;
+    public function __construct()
+    {
+        $this->bookModel = new BookModel();
+    }
+
+
     public function invoke()
     {
-        include_once('private/connection.php');
 
-        $sql = "SELECT * FROM books";
-        $result = $conn->query($sql);
-
+        $result = $this->bookModel->getAllBooks();
 
         if ($result->num_rows > 0) {
             echo  '<section class="book-grid">';
@@ -24,7 +30,5 @@ class BookController
         } else {
             echo 'There are no books in the database';
         }
-
-        $conn->close();
     }
 }
