@@ -1,11 +1,13 @@
 <?php
-
+include_once('models/book.php');
+include_once('private/connection.php');
 class BookModel
 {
+    
     public function getAllBooks()
     {
 
-        include_once('private/connection.php');
+        $conn = connect();
 
         $sql = "SELECT * FROM books";
         $result = $conn->query($sql);

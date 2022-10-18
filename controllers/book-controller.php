@@ -1,7 +1,6 @@
 <?php
 include_once("models/book-model.php");
-include_once('models/book.php');
-include_once('views/card-view.php');
+include_once('views/card-grid-view.php');
 
 class BookController
 {
@@ -15,22 +14,14 @@ class BookController
 
     public function invoke()
     {
+        $books = $this->bookModel->getAllBooks();
 
-        $result = $this->bookModel->getAllBooks();
-
-        if (count($result) > 0) {
-
-            echo  '<section class="book-grid">';
-
-            foreach ($result as $singleBook) {
-                $newCard = new CardView($singleBook->name, $singleBook->author, $singleBook->description);
-            }
-
-            $myBook = new CardView("Dune", "Frank Herbert", "");
-
-            echo  '</section>';
+        if (count($books) > 0) {
+            $bookGrid = new CardGridView($books);
         } else {
             echo 'There are no books in the database';
         }
+
+
     }
 }
